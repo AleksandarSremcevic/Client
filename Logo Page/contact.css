@@ -31,8 +31,9 @@ html, body {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s ease;
-    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    background: linear-gradient(90deg, #19a595, #5e0fbf, #66adb5, #9a25be, #0000ff, #920a82, #8b00ff);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbow 5s infinite linear;
 }
@@ -284,12 +285,4 @@ html, body {
 .floating-button:hover {
     background-color: #555;
     transform: scale(1.05);
-}
-
-/* Neon text effect with color changing */
-.neon-text {
-    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow 5s infinite linear;
 }
