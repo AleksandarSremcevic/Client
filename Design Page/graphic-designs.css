@@ -1,11 +1,17 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #f6d365, #fda085);
+    background: linear-gradient(120deg, #f6d365, #fda085), url('background-pattern.png'); /* Add background pattern */
+    background-size: cover, cover; /* Ensure the pattern covers the entire background */
+    background-attachment: fixed; /* Keep the background fixed during scroll */
     color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    align-items: center; /* Center content horizontally */
+    width: 100vw; /* Ensure body takes full viewport width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .navbar {
@@ -21,6 +27,9 @@ body {
     z-index: 1000;
     flex-wrap: wrap;
     font-size: 1.2rem;
+    width: 100%; /* Ensure navbar fits within viewport */
+    max-width: 1200px; /* Limit the maximum width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .navbar .logo {
@@ -71,6 +80,9 @@ body {
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     animation: fadeIn 1.5s ease-in-out;
+    width: 100%; /* Ensure header fits within viewport */
+    max-width: 1200px; /* Limit the maximum width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .header h1 {
@@ -92,6 +104,9 @@ body {
     padding: 30px;
     animation: fadeIn 1.5s ease-in-out;
     flex: 1;
+    width: 100%; /* Ensure design types section fits within viewport */
+    max-width: 1200px; /* Limit the maximum width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .design-card {
@@ -177,7 +192,6 @@ body {
         transform: scale(1);
     }
 }
-
 .close {
     position: absolute;
     top: 20px;
@@ -225,8 +239,47 @@ body {
     background-color: #333;
     color: white;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    font-size: 1.2rem;
+    width: 100vw; /* Ensure footer spans the full width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+@media (min-width: 1025px) {
+    body::before, body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 30px; /* Increase width */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+        animation: colorFade 10s linear infinite; /* Add color fade animation */
+        z-index: 1000; /* Ensure decorative borders are above the background */
+    }
+
+    body::before {
+        left: 0;
+    }
+
+    body::after {
+        right: 0;
+    }
+}
+
+@keyframes colorFade {
+    0% {
+        background: linear-gradient(to bottom, rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0));
+    }
+    25% {
+        background: linear-gradient(to bottom, rgba(0, 255, 0, 0.5), rgba(0, 255, 0, 0));
+    }
+    50% {
+        background: linear-gradient(to bottom, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0));
+    }
+    75% {
+        background: linear-gradient(to bottom, rgba(255, 255, 0, 0.5), rgba(255, 255, 0, 0));
+    }
+    100% {
+        background: linear-gradient(to bottom, rgba(255, 0, 255, 0.5), rgba(255, 0, 255, 0));
+    }
 }
 
 /* Animations */
@@ -258,6 +311,38 @@ body {
 }
 
 /* Responsive styles */
+@media (max-width: 1024px) {
+    .navbar .logo {
+        font-size: 1.8rem;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 8px 16px;
+    }
+
+    .header h1 {
+        font-size: 2.8rem;
+    }
+
+    .header p {
+        font-size: 1.4rem;
+    }
+
+    .design-types {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .design-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .floating-contact-button {
+        padding: 18px 25px;
+        font-size: 1.1rem;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar .logo {
         font-size: 1.5rem;
@@ -277,20 +362,40 @@ body {
     }
 
     .design-types {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
     .design-images {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .floating-contact-button {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .design-types {
         grid-template-columns: 1fr;
     }
 
     .design-images {
         grid-template-columns: 1fr;
+    }
+
+    .floating-contact-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
 }

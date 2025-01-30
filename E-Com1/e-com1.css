@@ -93,17 +93,6 @@ video {
     object-fit: cover;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 1000;
-}
-
 .header-content {
     position: absolute;
     top: 50%;
@@ -111,6 +100,7 @@ video {
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+    z-index: 2;
 }
 
 .header-content h1 {
@@ -140,11 +130,20 @@ video {
     display: inline-flex;
     gap: 50px; /* Spacing between brand names */
     animation: move-left-right 30s linear infinite;
+    animation-timing-function: linear;
+    white-space: nowrap;
+}
+
+.moving-brand .brand-name::after {
+    content: attr(data-text);
+    position: absolute;
+    white-space: nowrap;
+    transform: translateX(100%);
 }
 
 @keyframes move-left-right {
     0% {
-        transform: translateX(0);
+        transform: translateX(100%);
     }
     100% {
         transform: translateX(-100%);

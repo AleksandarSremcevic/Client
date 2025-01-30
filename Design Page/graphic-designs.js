@@ -26,4 +26,17 @@ document.addEventListener("DOMContentLoaded", function() {
             lightbox.style.display = 'none';
         }
     });
+
+    // Create and animate rainbow balls
+    if (window.innerWidth >= 1025) {
+        for (let i = 0; i < 5; i++) {
+            const leftBall = document.createElement('div');
+            leftBall.classList.add('rainbow-ball', 'left');
+            document.body.appendChild(leftBall);
+
+            const rightBall = document.createElement('div');
+            rightBall.classList.add('rainbow-ball', 'right');
+            document.body.appendChild(rightBall);
+        }
+    }
 });

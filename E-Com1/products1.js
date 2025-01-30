@@ -1,4 +1,16 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cartButtons = document.querySelectorAll('.product-card button');
+
+    cartButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            addToCart(this);
+        });
+    });
+
+    updateCart();
+});
 
 function filterProducts(category) {
     const productCards = document.querySelectorAll('.product-card');
@@ -15,7 +27,7 @@ function filterProducts(category) {
 function addToCart(button) {
     const productCard = button.parentElement;
     const productName = productCard.querySelector('h3').innerText;
-    const productPrice = productCard.querySelector('p').innerText;
+    const productPrice = parseFloat(productCard.querySelector('p').innerText.replace('$', ''));
     const productImage = productCard.querySelector('img').src;
 
     const product = {
@@ -33,8 +45,18 @@ function addToCart(button) {
         cart.push(product);
     }
 
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     toggleCart();
+}
+
+function removeFromCart(productName) {
+    const productIndex = cart.findIndex(item => item.name === productName);
+    if (productIndex !== -1) {
+        cart.splice(productIndex, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+    }
 }
 
 function updateCart() {
@@ -53,16 +75,14 @@ function updateCart() {
             <div>
                 <h4>${product.name}</h4>
                 <p>Quantity: ${product.quantity}</p>
-                <p>${product.price}</p>
+                <p>$${product.price.toFixed(2)}</p>
+                <button onclick="removeFromCart('${product.name}')">Remove</button>
             </div>
         `;
         cartItems.appendChild(cartItem);
     });
 
-    const totalPrice = cart.reduce((total, product) => {
-        const price = parseFloat(product.price.replace('$', ''));
-        return total + (price * product.quantity);
-    }, 0);
+    const totalPrice = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
 
     cartTotal.textContent = totalPrice.toFixed(2);
 }
@@ -75,7 +95,7 @@ function toggleCart() {
 }
 
 function checkout() {
-    alert('Proceeding to checkout...');
+    window.location.href = 'checkout1.html';
 }
 
 // Ensure the correct toggleMenu function is used
@@ -87,4 +107,5 @@ function toggleMenu() {
 // Show all products by default
 window.onload = function() {
     filterProducts('male'); // Change this to show a specific category on load if desired
+    updateCart(); // Ensure the cart is updated on page load
 };
