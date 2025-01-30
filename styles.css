@@ -1,0 +1,346 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    color: #333;
+    position: relative; /* Required for positioning background animation */
+}
+
+/* Container for the background animation to prevent scrolling */
+#background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Ensure it is behind the content */
+}
+
+/* Background animations */
+@keyframes moveBackground {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(50vw, 50vh);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        background-color: rgba(255, 0, 255, 0.5);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+#background-animation div {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: moveBackground 20s infinite, colorChange 10s infinite;
+}
+
+#background-animation div:nth-child(1) {
+    top: 20%;
+    left: 10%;
+}
+
+#background-animation div:nth-child(2) {
+    top: 40%;
+    left: 30%;
+}
+
+#background-animation div:nth-child(3) {
+    top: 60%;
+    left: 50%;
+}
+
+#background-animation div:nth-child(4) {
+    top: 80%;
+    left: 70%;
+}
+
+#background-animation div:nth-child(5) {
+    top: 90%;
+    left: 90%;
+}
+
+/* Navbar and section styles remain unchanged */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+
+.navbar .logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-links li {
+    transition: transform 0.3s ease;
+}
+
+.nav-links li:hover {
+    transform: scale(1.1);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #444;
+}
+
+.nav-links a:hover {
+    color: #fda085;
+    background-color: #555;
+}
+
+.section {
+    padding: 25px 15px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease forwards;
+    margin-bottom: 25px;
+    transition: background 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* Required for positioning background animation */
+    z-index: 1; /* Ensure content is above background animations */
+}
+
+.section h1 {
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+    color: #333;
+    animation: fadeIn 1s ease forwards;
+}
+
+.section p {
+    font-size: 1rem;
+    color: #666;
+    animation: fadeIn 1s ease forwards;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.gallery img,
+.gallery video {
+    width: 120px; /* Fixed width */
+    height: 120px; /* Fixed height */
+    object-fit: cover; /* Ensures images and videos cover the area without distortion */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover,
+.gallery video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+img,
+video {
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.logo-gallery, .template-gallery, .graphic-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.logo-item, .template-item, .graphic-item {
+    flex: 1 1 calc(33.333% - 20px); /* 3 items per row with space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.clickable-image {
+    cursor: pointer;
+}
+
+.section:hover {
+    background: rgba(245, 245, 245, 0.9);
+}
+
+section h1, section p {
+    animation: fadeIn 1s ease forwards;
+}
+
+.logo-item:hover, .template-item:hover, .graphic-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.neon-text {
+    color: #39ff14;
+    text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 80px #39ff14;
+    animation: neon 5s infinite alternate;
+}
+
+@keyframes neon {
+    0% {
+        color: #39ff14;
+        text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 80px #39ff14;
+    }
+    25% {
+        color: #ff14fc;
+        text-shadow: 0 0 5px #ff14fc, 0 0 10px #ff14fc, 0 0 20px #ff14fc, 0 0 40px #ff14fc, 0 0 80px #ff14fc;
+    }
+    50% {
+        color: #14ffec;
+        text-shadow: 0 0 5px #14ffec, 0 0 10px #14ffec, 0 0 20px #14ffec, 0 0 40px #14ffec, 0 0 80px #14ffec;
+    }
+    75% {
+        color: #ff1414;
+        text-shadow: 0 0 5px #ff1414, 0 0 10px #ff1414, 0 0 20px #ff1414, 0 0 40px #ff1414, 0 0 80px #ff1414;
+    }
+    100% {
+        color: #1414ff;
+        text-shadow: 0 0 5px #1414ff, 0 0 10px #1414ff, 0 0 20px #1414ff, 0 0 40px #1414ff, 0 0 80px #1414ff;
+    }
+}
+
+@media (max-width: 1200px) {
+    .section h1 {
+        font-size: 1.5rem;
+    }
+
+    .section p {
+        font-size: 0.9rem;
+    }
+
+    .gallery img,
+    .gallery video {
+        max-width: 100px; /* Adjusted size for smaller screens */
+        max-height: 100px;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .section h1 {
+        font-size: 1.5rem;
+    }
+
+    .section p {
+        font-size: 0.9rem;
+    }
+
+    .logo-item, .template-item, .graphic-item {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row */
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-item, .template-item, .graphic-item {
+        flex: 1 1 100%; /* 1 item per row */
+    }
+
+    .gallery img,
+    .gallery video {
+        max-width: 80px; /* Adjusted size for very small screens */
+        max-height: 80px;
+    }
+}
