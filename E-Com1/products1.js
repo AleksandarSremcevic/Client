@@ -106,6 +106,5 @@ function toggleMenu() {
 
 // Show all products by default
 window.onload = function() {
-    filterProducts('male'); // Change this to show a specific category on load if desired
     updateCart(); // Ensure the cart is updated on page load
 };
